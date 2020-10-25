@@ -3,6 +3,7 @@ from http.cookies import SimpleCookie
 import io
 import cgi
 import re
+import json
 
 
 def clean(item):
@@ -87,7 +88,7 @@ class Context():
         #HTTP Request
         self.request = dict()
         self.request["content-length"] = environ.get("CONTENT_LENGTH", 0)
-        self.request["content-type"] = "text/html"
+        self.request["content-type"] = environ.get("CONTENT_TYPE", "text/html")
         self.request["user-agent"] = environ.get("HTTP_USER-AGENT", "")
         self.request["ip-address"] = environ.get("REMOTE_ADDR", "")
         self.request["path"] = environ.get("PATH_INFO", "/")
@@ -100,6 +101,7 @@ class Context():
 
         #HTTP Response dict
         self.response = dict()
+        self.response["content-type"] = self.request["content-type"]
 
         #HTTP Parameters dict()
         self.params = dict()
@@ -108,17 +110,25 @@ class Context():
             self.request["content-length"]=0
 
         #HTTP Form
+        #Parse form content
         self.form = dict()
         self.formFile = dict()
+        self.json = ''
         fp = self.request["data"].read(int(self.request["content-length"]))
-        formValues = cgi.FieldStorage(fp=io.BytesIO(fp), environ=environ, keep_blank_values=True)
-        keys = formValues.keys()
-        for key in keys:
-            value = formValues[key]
-            if value.filename:
-                self.formFile[key] = value
-            else:
-                self.form[key] = formValues.getvalue(key)
+        if self.request["content-type"] == "application/x-www-form-urlencoded":
+            formValues = cgi.FieldStorage(fp=io.BytesIO(fp), environ=environ, keep_blank_values=True)
+            keys = formValues.keys()
+            for key in keys:
+                value = formValues[key]
+                if value.filename:
+                    self.formFile[key] = value
+                else:
+                    self.form[key] = formValues.getvalue(key)
+        elif self.request["content-type"] == "application/json":
+            #Process Json request
+            self.json = json.loads(fp.decode())
+
+
         
         
         #Query matching and parsing

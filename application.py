@@ -1,5 +1,6 @@
-from parser import Context
-import router
+from .parser import  Context
+from . import router
+from .http_response import response, load
 
 
 class App(object):
@@ -34,7 +35,7 @@ class App(object):
 
         matched_route = router.match_route(self.routes_no_func, path)
         if matched_route == None:
-            resp = not_found(context)
+            response_ = not_found(context)
         else:
             id_, slug = router.get_params(matched_route, path)
             context.params["slug"] = slug
@@ -83,11 +84,23 @@ class App(object):
         self.routes_no_func.append(uri)
 
 
-
-
+# App class instantiation
+App = App()
 
 def not_found(context):
-    data = encode_html("404.html")
+    try:
+        data = load("404.html")
+    except:
+        data = b"""
+        <html>
+            <head>
+                    <title>404 Not Found</title>
+            </head>
+            <body>
+            <h2>404 Not Found</h2>
+            </body>
+        </html>
+        """
     return response(context, "404 NOT FOUND", data)
 
 
