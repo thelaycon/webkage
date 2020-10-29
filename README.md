@@ -10,7 +10,7 @@ It is not meant to replace or compete with existing matured Python webframeworks
 Webkage's philosophy is simlilar to those of Golang's http library. It emphasizes flexibility and control.
 
 
-**It is purely for learning purpose**
+**It is purely for learning purpose.**
 
 # Table Of Contents
 
