@@ -12,7 +12,7 @@ Webkage's philosophy is simlilar to those of Golang's http library. It emphasize
 
 
 
-##Introduction
+## Introduction
 
 Creating a web application is simple. The developer first import an instance of the WSGI application and registers a route.
 
@@ -72,7 +72,7 @@ $ gunicorn app:wsgi
 ```
 
 
-##Router
+## Router
 
 In Webkage, routes must be registered using the ```add_path``` method of the application instance. It accepts two compulsory arguments; the path and view function.
 
@@ -88,7 +88,7 @@ def home(ctx):
 def login(ctx):
    ...
 
-##Register routes
+## Register routes
 App.add_path("/", home)
 App.add_path("login/", login)
 
@@ -115,7 +115,7 @@ App.add_path("product/:slug/", productSlugDetail)
 The values of these parameters can be accessed in the view function.
 
 
-##Views
+## Views
 
 While registering routes, views must be assigned to the routes.
 
@@ -152,7 +152,7 @@ List of http response codes can be accessed via http.HTTPStatus module.
 
 
 
-##MiddleWares
+## MiddleWares
 
 Middlewares can be achieved through decorators or high level functions.
 
@@ -205,7 +205,7 @@ App.add_path("dashboard/", auth_middleware(dashboard))
 ```
 
 
-##Url Parameters
+## Url Parameters
 
 Url parameters can be accessed via the Context object's `params` attribute.
 
@@ -227,7 +227,7 @@ App.add_path("product/:id", product)
 ```
 
 
-##Url Query 
+## Url Query 
 
 Url queries can be accessed via the Context object's `query` attribute.
 
@@ -251,7 +251,7 @@ App.add_path("product/", product)
 ```
 
 
-##Form 
+## Form 
 
 Form values can be accessed via the context object's `form` attribute.
 
@@ -276,7 +276,7 @@ App.add_path("product/add", add_product)
 Files uploaded cannot be accessed via the `form` attribute.
 
 
-##Form Files
+## Form Files
 
 Files uploaded via HTTP forms can be accessed the Context object's `formFile` attribute.
 
@@ -302,7 +302,7 @@ App.add_path("cases/add", new_cases)
 ```
 
 
-##Json Requests & Response
+## Json Requests & Response
 
 Json objects can be accessed the Context object's `json` attribute; the value is a valid Python dictionary object.
 
@@ -310,7 +310,7 @@ Json response should be done with **webkage.http_response.json_response**, else 
 
 
 
-##Session and Cookies
+## Session and Cookies
 
 Webkage has no provision for File or Database based sessions. It's solely a client-based one. All Cookies are HttpOnly by default.
 
@@ -393,7 +393,7 @@ def logout(ctx):
 
 ```
 
-##Redirects
+## Redirects
 
 Both Permanent and Temporary redirects can be acheived by specifying the right status code. Redirect can be acheived via **wekage.http_response.redirect**
 
@@ -412,7 +412,7 @@ def secret(ctx):
 ```
 
 
-##Templates
+## Templates
 
 Webkage's Templates are powered by Jinja2's templating engine. Templates are expected to reside in `./templates` directory relatively to the module or file in which the WSGI App instance resides.
 
@@ -465,7 +465,7 @@ def items_list(ctx):
 ```
 
 
-##HTTP Request Header
+## HTTP Request Header
 
 The Context object's `request` attributes contain the following keys and values:
 
