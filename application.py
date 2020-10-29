@@ -71,14 +71,15 @@ class App(object):
 
     def serve_static(self, context, path):
         """ Method to serve static files """
-        file_path = self.static_dir + path.lstrip(self.static_path_prefix).rstrip("/")
+        file_path = self.static_dir + path.replace(self.static_path_prefix, '').rstrip("/")
+        status = "200 OK"
         try:
             with open(file_path, "rb") as file_:
                 static_file = file_.read()
-        except:
+        except Exception as e:
             static_file = b''
-
-        return static_response(context, "200 OK", static_file)
+            status = "404"
+        return response(context, status, static_file)
 
 
     def add_path(self, uri, method):

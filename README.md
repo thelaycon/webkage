@@ -19,6 +19,7 @@ Webkage's philosophy is simlilar to those of Golang's http library. It emphasize
 
 * [Introduction](#introduction)
 * [Routing](#routing)
+* [Static Files](#static-files)
 * [Views](#views)
 * [Middlewares](#middlewares)
 * [Url Parameters](#url-parameters)
@@ -134,6 +135,28 @@ App.add_path("product/:slug/", productSlugDetail)
 ```
 
 The values of these parameters can be accessed in the view function.
+
+
+## Static Files
+
+In Webkage, static files are served by first registering the directory from which the files will be served from. The `set_static` method is responsible for this.
+
+```
+app.py
+
+from webkage.application import App
+
+
+...
+
+# Serve static
+App.set_static("/static/", "static")
+
+...
+
+```
+
+The first argument is the prefix of all static files to be served. The last argument is the directory from which the static files reside.
 
 
 ## Views
@@ -435,7 +458,7 @@ def secret(ctx):
 
 ## Templates
 
-Webkage's Templates are powered by Jinja2's templating engine. Templates are expected to reside in `./templates` directory relatively to the module or file in which the WSGI App instance resides.
+Webkage's Templates are powered by Jinja2's templating engine. Templates are expected to reside in `./templates` directory relatively to the module or file in which the views reside.
 
 An example directory will look like:
 
