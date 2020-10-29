@@ -1,14 +1,35 @@
 Webkage is a fast and lightweight Python webframework created for learning purpose only.
 
-It was created with pure Python with no external dependencies (except Jinja2, :D).
+It was created with pure Python with no external dependencies (except Jinja2, :smirk:).
 
-It is not meant to replace or compete with existing matured Python webframeworks like Flask, Django, Tornado, etc. Maybe because no Tests were written or no tight security measures are in place.
+It is not meant to replace or compete with existing matured Python webframeworks like Flask, Django, Tornado, etc. Maybe because no Tests were written or no tight security measures are in place. 
+
+:stuck_out_tongue:
 
 
 Webkage's philosophy is simlilar to those of Golang's http library. It emphasizes flexibility and control.
 
 
 **It is purely for learning purpose**
+
+# Table Of Contents
+
+=====================
+
+
+* [Introduction](#introduction)
+* [Routing](#routing)
+* [Views](#views)
+* [Middlewares](#middlewares)
+* [Url Parameters](#url-parameters)
+* [Url Query](#url-query)
+* [Form](#form)
+* [Form Files](#form-files)
+* [Json Request & Response](#json-request--response)
+* [Session and Cookies](#session-and-cookies)
+* [Redirects](#redirects)
+* [Templates](#templates)
+* [HTTP Request header](#http-request-header)
 
 
 
@@ -72,7 +93,7 @@ $ gunicorn app:wsgi
 ```
 
 
-## Router
+## Routing
 
 In Webkage, routes must be registered using the ```add_path``` method of the application instance. It accepts two compulsory arguments; the path and view function.
 
@@ -302,7 +323,7 @@ App.add_path("cases/add", new_cases)
 ```
 
 
-## Json Requests & Response
+## Json Request & Response
 
 Json objects can be accessed the Context object's `json` attribute; the value is a valid Python dictionary object.
 
