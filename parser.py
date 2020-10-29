@@ -1,4 +1,5 @@
-# Parser module to parse environ variables
+""" Parser module to parse environ variables """
+
 from http.cookies import SimpleCookie
 import io
 import cgi
@@ -85,6 +86,7 @@ class Context():
         self.session = Cookie()
         self.session.load(cookie)
 
+
         #HTTP Request
         self.request = dict()
         self.request["content-length"] = environ.get("CONTENT_LENGTH", 0)
@@ -101,7 +103,6 @@ class Context():
 
         #HTTP Response dict
         self.response = dict()
-        self.response["content-type"] = self.request["content-type"]
 
         #HTTP Parameters dict()
         self.params = dict()

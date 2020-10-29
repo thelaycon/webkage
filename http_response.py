@@ -1,4 +1,5 @@
-# Response module
+""" Response module to handle http response """
+
 from .parser import set_cookie_header
 import json
 import jinja2
@@ -7,11 +8,11 @@ import jinja2
 
 def response(context, status, data):
     """ Set Header and start response """
-    content_type = context.response["content-type"]
+    content_type = "text/html"
     set_cookie = set_cookie_header(context.session)
     header = [("Content-Type", content_type),] + set_cookie
     start_response = context.response["start_response"]
-    start_response(status, header)
+    start_response(status+" ", header)
     return data
 
 
@@ -21,7 +22,7 @@ def json_response(context, status, data):
     set_cookie = set_cookie_header(context.session)
     header = [("Content-Type", content_type),] + set_cookie
     start_response = context.response["start_response"]
-    start_response(status, header)
+    start_response(status+" ", header)
     return jsonify(data)
 
 
@@ -52,7 +53,7 @@ def redirect(context, status, uri):
     """ Function to redirect users to new location """
     header = [("Location", uri)]
     start_response = context.response["start_response"]
-    start_response(status, header)
+    start_response(status+" ", header)
     return b""
 
 

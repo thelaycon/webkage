@@ -1,4 +1,4 @@
-# Router package for matching routes
+""" Router module for matching routes """
 import re
 
 

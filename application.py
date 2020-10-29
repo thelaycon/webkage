@@ -1,6 +1,11 @@
+""" The Application module provides an interface for WSGI """
+
+
+from wsgiref.simple_server import make_server
 from .parser import  Context
 from . import router
 from .http_response import response, load
+
 
 
 class App(object):
@@ -48,7 +53,7 @@ class App(object):
 
 
 
-    def run(self, environ, start_response):
+    def wsgi(self, environ, start_response):
         """ WSGI entry point"""
 
         context_ = Context(environ)
@@ -75,7 +80,10 @@ class App(object):
 
         return static_response(context, "200 OK", static_file)
 
+
     def add_path(self, uri, method):
+        """ Adds and register routes """
+
         if uri[-1] != "/":
             uri += "/"
         uri = router.path_to_regex(uri)
@@ -84,10 +92,18 @@ class App(object):
         self.routes_no_func.append(uri)
 
 
-# App class instantiation
-App = App()
+    def serve(self, host="127.0.0.1", port=8000):
+        """ Serve App locally. Not suitable for production """
+
+        httpd = make_server(host, port, self.wsgi)
+        print("Listening on %s:%d" %(host, port))
+        httpd.serve_forever()
+
+
+
 
 def not_found(context):
+    """ 404 response view """
     try:
         data = load("404.html")
     except:
@@ -104,3 +120,5 @@ def not_found(context):
     return response(context, "404 NOT FOUND", data)
 
 
+# App class instantiation
+App = App()
