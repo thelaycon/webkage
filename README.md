@@ -1,6 +1,6 @@
 Webkage is a fast and lightweight Python webframework created for learning purpose only.
 
-It was created with pure Python with no external dependencies (except Jinja2, :smirk:).
+It was created with pure Python with no external dependencies (except Jinja2).
 
 It is not meant to replace or compete with existing matured Python webframeworks like Flask, Django, Tornado, etc.  
 
