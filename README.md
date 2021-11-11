@@ -4,7 +4,6 @@ It was created with pure Python with no external dependencies (except Jinja2, :s
 
 It is not meant to replace or compete with existing matured Python webframeworks like Flask, Django, Tornado, etc.  
 
-:stuck_out_tongue:
 
 
 Webkage's philosophy is simlilar to those of Golang's http library. It emphasizes flexibility and control.
