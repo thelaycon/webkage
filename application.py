@@ -4,7 +4,7 @@
 from wsgiref.simple_server import make_server
 from .parser import  Context
 from . import router
-from .http_response import response, load
+from .http_response import response, static_response, load
 
 
 
@@ -76,10 +76,12 @@ class App(object):
         try:
             with open(file_path, "rb") as file_:
                 static_file = file_.read()
+                if file_path.endswith(".css"):
+                    context["content-type"] = "text/css"
         except Exception as e:
             static_file = b''
             status = "404"
-        return response(context, status, static_file)
+        return static_response(context, status, static_file)
 
 
     def add_path(self, uri, method):
