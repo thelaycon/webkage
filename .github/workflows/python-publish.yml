@@ -33,6 +33,7 @@ jobs:
         password: ${{ secrets.PYPI_API_TOKEN }}
     - name: Build and Upload to TestPyPI
       run: |
+        pip install twine
         python3 -m twine upload dist/*
       env:
         TWINE_USERNAME: __token__
