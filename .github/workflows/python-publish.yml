@@ -21,4 +21,4 @@ jobs:
         python -m build --sdist --wheel --outdir dist/
     - name: Publish distribution 📦 to PyPI
       run: >-
-        twine upload dist/*
+        twine upload dist/* --username ${{ secrets.PYPI_NAME }} --password ${{ secrets.PYPI_PASSWORD }}
