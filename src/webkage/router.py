@@ -1,4 +1,4 @@
-""" Router module for matching routes """
+""" Router module for matching routes/paths."""
 import re
 
 
@@ -23,6 +23,7 @@ def match_route(routes, path):
 
 
 def get_params(match, path):
+    """URI parameters are parsed here."""
     path_segments = path.split("/")
     match_segments = match.split("/")
     id_ = None

@@ -1,4 +1,4 @@
-""" Parser module to parse environ variables """
+""" Parser module to parse environ variables."""
 
 from http.cookies import SimpleCookie
 import io
