@@ -23,15 +23,16 @@ class App(object):
 
         global resp
 
-        path = context.request["path"]
-        if path[-1] != "/":
-            path += "/"
 
+        path = context.request["path"]
         #Check if static
         if path.startswith(self.static_path_prefix):
             resp = self.serve_static(context, path)
         else:
+            if path[-1] != "/":
+                path += "/"
             resp = self.serve_response(context, path)
+
         return resp
        
 
@@ -50,7 +51,7 @@ class App(object):
             context.params["id"] = id_
             for route in self.routes_func:
                 if route[0] == matched_route:
-                    response_ = route[1](context)
+                    response_ = route[1](context) #Execute view function
         return response_ 
 
 
@@ -94,11 +95,11 @@ class App(object):
         try:
             with open(file_path, "rb") as file_:
                 static_file = file_.read()
-                if file_path.endswith(".css"):
-                    context["content-type"] = "text/css"
+            if file_path.endswith(".css"):
+                context.request["content-type"] = "text/css"
         except Exception as e:
             static_file = b''
-            status = "404"
+            status = "404 NOT FOUND"
         return static_response(context, status, static_file)
 
 
@@ -157,5 +158,3 @@ def not_found(context):
     return response(context, "404 NOT FOUND", data)
 
 
-# App class instantiation
-App = App()

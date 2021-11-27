@@ -37,7 +37,7 @@ class Cookie(SimpleCookie):
 
     def __setitem__(self, key, value):
         super().__setitem__(key, value)
-        item = self.__getitem__(key)
+
 
     def httponly(self, choice):
         """Set httponly option in Set-Cookie"""
@@ -48,7 +48,6 @@ class Cookie(SimpleCookie):
             if "HttpOnly" in self.options:
                 self.options.remove("HttpOnly")
 
-
     def secure(self, choice):
         if choice == True:
             if not "Secure" in self.options:
@@ -56,9 +55,6 @@ class Cookie(SimpleCookie):
         elif choice == False:
             if "Secure" in self.options:
                 self.options.remove("Secure")
-    
-
-
     
     def flush(self):
         """Expires a given cookie value"""
@@ -69,10 +65,6 @@ class Cookie(SimpleCookie):
         """Sets future expiry date for cookie value"""
 
         self.options.append("expires={}".format(date))
-
-
-
-
 
 
 
