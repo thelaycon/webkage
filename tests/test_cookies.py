@@ -1,10 +1,8 @@
-from webkage.application import App
 from webkage.http_response import response
 from webkage.parser import Cookie
 from test_settings import BaseView, client
 
 
-app = App()
 
 
 class View(BaseView):

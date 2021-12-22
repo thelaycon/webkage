@@ -1,8 +1,20 @@
 Webkage is a fast and lightweight Python webframework created for learning purpose only.
 
-It was created with pure Python with no external dependencies (except Jinja2).
+It was created with pure Python standard library with no external dependencies (except Jinja2).
 
-Webkage's philosophy is simlilar to those of Golang's http library. It emphasizes flexibility and control.
+Webkage's philosophy is simlilar to that of Golang's http library. It emphasizes flexibility and full control.
+
+# Tests
+
+Relies on Pytest and Werkzeug testing client for Unit testing.
+
+```
+$ pip install werkzeug pytest
+$ cd tests
+$ pytest .
+
+```
+
 
 # Table Of Contents
 
@@ -19,10 +31,11 @@ Webkage's philosophy is simlilar to those of Golang's http library. It emphasize
 * [Form](#form)
 * [Form Files](#form-files)
 * [Json Request & Response](#json-request--response)
-* [Session and Cookies](#session-and-cookies)
+* [Session and Cookies](#sion-and-cookies)
 * [Redirects](#redirects)
 * [Templates](#templates)
 * [HTTP Request header](#http-request-header)
+* [CSRF Tokens](#csrf-tokens)
 
 
 
@@ -38,6 +51,7 @@ app.py
 from webkage.application import App
 from http_response import load, response
 
+App = App()
 
 def home(ctx):
     resp = load("home.html")
@@ -66,6 +80,7 @@ app.py
 from webkage.application import App
 from http_response import load, response
 
+App = App()
 
 def home(ctx):
     resp = load("home.html")
@@ -299,7 +314,8 @@ app.py
 
 
 def add_product(ctx):
-   product_name = ctx.form["name"]
+   if ctx.request["method"] == "POST":
+      product_name = ctx.form["name"]
    ...
 
 App.add_path("product/add", add_product)
@@ -323,7 +339,7 @@ app.py
 ...
 
 
-def new_cases(ctx):
+def new_ca(ctx):
    csv_file = ctx.formFile["csv_file"]
    
    #Access file's name via the filename attribute
@@ -331,7 +347,7 @@ def new_cases(ctx):
        f.write(f.read())
    ...
 
-App.add_path("cases/add", new_cases)
+App.add_path("ca/add", new_cases)
 
 ...
 
@@ -348,7 +364,7 @@ Json response should be done with **webkage.http_response.json_response**, else 
 
 ## Session and Cookies
 
-Webkage has no provision for File or Database based sessions. It's solely a client-based one. All Cookies are HttpOnly by default.
+Webkage has no provision for File or Database based sions. It's solely a client-based one. All Cookies are HttpOnly by default.
 
 
 **Setting Cookies' value**
@@ -503,7 +519,13 @@ def items_list(ctx):
 
 ## HTTP Request Header
 
-The Context object's `request` attributes contain the following keys and values:
+The Context object's `request` objects contain the following keys:
+
+
+```
+ctx.request[key]
+
+``` 
 
 **content-length** Length of HTTP request's body.
 
@@ -520,4 +542,6 @@ The Context object's `request` attributes contain the following keys and values:
 **scheme** Http, Https, etc.
 
 
+## CSRF Tokens
 
+Webkage does not implement CSRF tokens by default, users who are not building microservices can implement a Middleware to handle this.

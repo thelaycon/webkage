@@ -1,14 +1,8 @@
-import base64
 import json
 import pytest
-from webkage.application import App
-from  webkage.http_response import response, redirect, json_response
+from  webkage.http_response import redirect, json_response
 from webkage.http_response import load
 from test_settings import BaseView, client
-
-
-
-app = App() #Create app instance
 
 
 

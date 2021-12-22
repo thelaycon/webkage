@@ -108,7 +108,7 @@ class Context():
         self.formFile = dict()
         self.json = ''
         fp = self.request["data"].read(int(self.request["content-length"]))
-        if self.request["content-type"] == "application/x-www-form-urlencoded":
+        if self.request["content-type"] == "application/x-www-form-urlencoded" or self.request["content-type"] == "multipart/form-data" :
             formValues = cgi.FieldStorage(fp=io.BytesIO(fp), environ=environ, keep_blank_values=True)
             keys = formValues.keys()
             for key in keys:
