@@ -1,6 +1,6 @@
-Webkage is a fast and lightweight Python webframework created for learning purpose only.
+Webkage is a fast and lightweight Python webframework.
 
-It was created with pure Python standard library with no external dependencies (except Jinja2).
+It was created with the Python standard library and no external dependencies (except Jinja2).
 
 Webkage's philosophy is simlilar to that of Golang's http library. It emphasizes flexibility and full control.
 
