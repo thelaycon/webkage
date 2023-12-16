@@ -2,14 +2,10 @@
 
 # Webkage
 
-![logo](wekage.jfif)
+<img src="webkage.jfif" width="200">
 
 
 Webkage is a fast and lightweight Python web framework.
-
-It was created with the Python standard library and no external dependencies (except Jinja2).
-
-Webkage's philosophy is similar to that of Golang's HTTP library. It emphasizes flexibility and full control.
 
 # Tests
 
@@ -38,7 +34,7 @@ $ pytest
 * [Form](#form)
 * [Form Files](#form-files)
 * [Json Request & Response](#json-request--response)
-* [Session and Cookies](#sion-and-cookies)
+* [Session and Cookies](#session-and-cookies)
 * [Redirects](#redirects)
 * [Templates](#templates)
 * [HTTP Request header](#http-request-header)
@@ -48,8 +44,11 @@ $ pytest
 
 ## Introduction
 
-Creating a web application is simple. The developer first import an instance of the WSGI application and registers a route.
+Webkage is a lightweight Python web framework designed for speed and flexibility, with an emphasis on simplicity and control. It is built using the Python standard library and has minimal external dependencies, relying only on Jinja2 for templating.
 
+To create a web application using Webkage, developers import an instance of the WSGI application and register routes. The development server can be started with the command App.serve().
+
+For production deployment, the WSGI App entry point can be accessed via the wsgi attribute. Example using Gunicorn:
 
 ```
 app.py
@@ -78,7 +77,8 @@ This would spin up a development WSGI server that listens on **127.0.0.1:8000**
 
 This is a development server and it's not suitable for production. For a production based WSGI web server, the entry point for the WSGI App can be accessed via the `wsgi` attribute.
 
-Example using gunicorn.
+Example using Gunicorn.
+
 
 ```
 app.py
@@ -100,7 +100,7 @@ wsgi = App.wsgi
 
 ```
 
-Serving the App through gunicorn:
+To serve the app through Gunicorn:
 
 ```
 $ gunicorn app:wsgi
@@ -110,7 +110,7 @@ $ gunicorn app:wsgi
 
 ## Routing
 
-In Webkage, routes must be registered using the ```add_path``` method of the application instance. It accepts two compulsory arguments; the path and view function.
+In Webkage, routes are registered using the `add_path` method of the application instance. Routes are associated with view functions.
 
 
 ```
@@ -153,7 +153,7 @@ The values of these parameters can be accessed in the view function.
 
 ## Static Files
 
-In Webkage, static files are served by first registering the directory from which the files will be served from. The `set_static` method is responsible for this.
+Static files in Webkage are served by registering the directory from which the files will be served using the `set_static` method.
 
 ```
 app.py
@@ -175,11 +175,7 @@ The first argument is the prefix of all static files to be served. The last argu
 
 ## Views
 
-While registering routes, views must be assigned to the routes.
-
-A view function is a simple function with just one parameter and returns an http response using either **webkage.http_response.response** or **webkage.http_response.json_response**.
-
-Both of these functions accept three compulsory arguments.
+When registering routes, views must be assigned to the routes. A view function is a simple function with one parameter, returning an HTTP response using either **webkage.http_response.response** or **webkage.http_response.json_response**.
 
 ```
 app.py
