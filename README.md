@@ -1,5 +1,9 @@
 ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg) ![tests](badges/tests.svg) ![coverage](badges/coverage.svg) 
 
+# Webkage
+
+![logo](wekage.jfif)
+
 
 Webkage is a fast and lightweight Python web framework.
 
