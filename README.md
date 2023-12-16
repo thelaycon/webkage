@@ -1,20 +1,20 @@
 ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg) ![tests](badges/tests.svg) ![coverage](badges/coverage.svg) 
 
 
-Webkage is a fast and lightweight Python webframework.
+Webkage is a fast and lightweight Python web framework.
 
 It was created with the Python standard library and no external dependencies (except Jinja2).
 
-Webkage's philosophy is simlilar to that of Golang's http library. It emphasizes flexibility and full control.
+Webkage's philosophy is similar to that of Golang's HTTP library. It emphasizes flexibility and full control.
 
 # Tests
 
-Relies on Pytest and Werkzeug testing client for Unit testing.
+Relies on Pytest and Werkzeug testing clients for Unit testing.
 
 ```
 $ pip install werkzeug pytest
 $ cd tests
-$ pytest .
+$ pytest
 
 ```
 
