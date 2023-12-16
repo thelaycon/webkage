@@ -1,21 +1,9 @@
 from werkzeug.test import Client
-from webkage.application import App
 from webkage.http_response import response
-
+from webkage.application import App
 
 
 app = App()
-
-#Client to stimulate server
-def client(routes, app=app):
-    #Routes should be a list of tuples containing a path and a view function
-    wsgi = app.wsgi
-    client_ = Client(wsgi)
-    if routes:
-        for route in routes:
-            app.add_path(route[0], route[1])
-    return client_
-
 
 class BaseView:
     """A class for creating view objects"""
@@ -36,5 +24,20 @@ class BaseView:
         data = self.data.encode()
         return response(ctx, self.status_code, data)
 
+    def set_cookie(self, ctx):
+        session = ctx.session["Name"] = "Loki"
+        return response(ctx, "200 OK", self.data.encode())
+
+
+
+def client(routes=[], app=app):
+
+    #Tested routes should be a list of tuples containing a path and a view function in each of the tuple
+    wsgi = app.wsgi
+    client_ = Client(wsgi)
+    if routes:
+        for route in routes:
+            app.add_path(route[0], route[1])
+    return client_
 
 
