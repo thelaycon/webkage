@@ -1,4 +1,4 @@
-""" A lightweight Python web framework 
+""" A lightweight Python web framework
 
 
 Author: Tobi Balogun

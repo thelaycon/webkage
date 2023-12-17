@@ -5,7 +5,6 @@ import json
 import jinja2
 
 
-
 def response(context, status, data):
     """This method should be returned at the end of your views. All three arguments are compulsory and must be specified.
 
@@ -24,7 +23,7 @@ def response(context, status, data):
     set_cookie = set_cookie_header(context.session)
     header = [("Content-Type", content_type),] + set_cookie
     start_response = context.response["start_response"]
-    start_response(status+" ", header)
+    start_response(status + " ", header)
     return data
 
 
@@ -34,7 +33,7 @@ def json_response(context, status, data):
     set_cookie = set_cookie_header(context.session)
     header = [("Content-Type", content_type),] + set_cookie
     start_response = context.response["start_response"]
-    start_response(status+" ", header)
+    start_response(status + " ", header)
     return jsonify(data)
 
 
@@ -75,7 +74,5 @@ def redirect(context, status, uri):
     """
     header = [("Location", uri)]
     start_response = context.response["start_response"]
-    start_response(status+" ", header)
+    start_response(status + " ", header)
     return b""
-
-

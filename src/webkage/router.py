@@ -14,7 +14,6 @@ def path_to_regex(path):
     return path
 
 
-
 def match_route(routes, path):
     for route in routes:
         match = re.match(route, path)
@@ -34,22 +33,9 @@ def get_params(match, path):
         id_index = match_segments.index("[0-9]+")
     if "[a-zA-Z]+(?:-[a-zA-Z]+)*" in match_segments:
         slug_index = match_segments.index("[a-zA-Z]+(?:-[a-zA-Z]+)*")
-    if id_index != None:
+    if id_index is not None:
         id_ = path_segments[id_index]
-    if slug_index != None:
+    if slug_index is not None:
         slug = path_segments[slug_index]
 
     return (id_, slug)
-
-
-
-
-
-
-        
-        
-
-
-
-
-
