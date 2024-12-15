@@ -4,7 +4,7 @@
 
 <img src="webkage.jfif" width="200">
 
-
+## Webkage has been discontinued, please switch to more modern web frameworks.
 Webkage is a fast and lightweight Python web framework.
 
 # Tests
